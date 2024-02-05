@@ -58,77 +58,119 @@ export default function NewStory() {
       className="page"
       style={{
         display: "flex",
-        flexDirection: "column",
-        margin: "1rem",
-        textAlign: "center",
+        flexDirection: "row",
+        background: "linear-gradient(90deg, #A57D64 45vw, #f0f2f5 45vw)",
+        height: "100vh",
       }}
     >
-      <h2>Create new story</h2>
-
-      <FormControl sx={{ display: "flex", flex: 1 }}>
-        <TextField
-          placeholder="Title..."
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-          sx={{ margin: "1rem" }}
-        ></TextField>
-        <TextField
-          placeholder="Genre..."
-          onChange={(e) => {
-            setGenre(e.target.value);
-          }}
-          sx={{ margin: "1rem" }}
-        ></TextField>
-        <TextareaAutosize
-          placeholder="Description..."
-          minRows={2}
-          variant="soft"
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
+      <div
+        className="inner-container"
+        style={{
+          display: "flex",
+          flex: "row",
+          position: "relative",
+          left: "20vw",
+          height: "75vh",
+          width: "65vw",
+          top: "10vh",
+          boxShadow: "0px 0px 10px 2px rgba(0,0,0,0.4)",
+        }}
+      >
+        <div className="pic-container" style={{}}>
+          <img
+            src="/images/create_story_pic.jpg"
+            style={{
+              height: "75vh",
+              width: "25vw",
+            }}
+            alt="Create Story Pic"
+          />
+        </div>
+        <div
           style={{
-            margin: "1rem",
-            backgroundColor: "transparent",
-            borderRadius: "0.25rem",
-            borderColor: "gray",
-          }}
-        ></TextareaAutosize>
-        <FormLabel
-          id="demo-radio-buttons-group-label"
-          style={{ margin: "1rem" }}
-        >
-          Visibility
-        </FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
-          name="radio-buttons-group"
-          onChange={(e) => {
-            setVisibility(e.target.value);
+            flex: 1,
+            margin: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <FormControlLabel
-            value={true}
-            style={{ margin: "1rem", color: "#0F1035" }}
-            control={<Radio />}
-            label="Public"
-          />
-          <FormControlLabel
-            value={false}
-            control={<Radio />}
-            label="Private"
-            style={{ margin: "1rem" }}
-          />
-        </RadioGroup>
-        <Button
-          style={{ margin: "1rem" }}
-          variant="contained"
-          onClick={onClickHandler}
-        >
-          Create Story
-        </Button>
-      </FormControl>
+          <h2>Create new story</h2>
+          <p>
+            A repository contains all project files, including the revision
+            history.
+          </p>
+          <FormControl sx={{ display: "flex", flex: 1 }}>
+            <FormLabel sx={{ display: "flex", alignItems: "center" }}>
+              Title
+              <TextField
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+                sx={{ margin: "1rem" }}
+              ></TextField>
+            </FormLabel>
+            <FormLabel sx={{ display: "flex", alignItems: "center" }}>
+              Genre
+              <TextField
+                onChange={(e) => {
+                  setGenre(e.target.value);
+                }}
+                sx={{ margin: "1rem" }}
+              ></TextField>
+            </FormLabel>
+
+            <FormLabel sx={{ display: "flex", alignItems: "center" }}>
+              Description
+              <TextareaAutosize
+                minRows={2}
+                variant="soft"
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+                style={{
+                  margin: "1rem",
+                  backgroundColor: "transparent",
+                  borderRadius: "0.25rem",
+                  borderColor: "gray",
+                }}
+              ></TextareaAutosize>
+            </FormLabel>
+            <RadioGroup
+              row
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="female"
+              name="radio-buttons-group"
+              onChange={(e) => {
+                setVisibility(e.target.value);
+              }}
+              sx={{ display: "flex", alignItems: "center" }}
+            >
+              <FormLabel>Visibility</FormLabel>
+              <FormControlLabel
+                value={true}
+                style={{ margin: "1rem", color: "rgba(0, 0, 0, 0.6)" }}
+                control={<Radio />}
+                label="Public"
+              />
+              <FormControlLabel
+                value={false}
+                control={<Radio />}
+                label="Private"
+                style={{ margin: "1rem", color: "rgba(0, 0, 0, 0.6)" }}
+              />
+            </RadioGroup>
+            <Button
+              variant="contained"
+              onClick={onClickHandler}
+              style={{ margin: "1rem", backgroundColor: "#A57D64" }}
+            >
+              Create Story
+            </Button>
+          </FormControl>
+        </div>
+      </div>
     </div>
   );
 }

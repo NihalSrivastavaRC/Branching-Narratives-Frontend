@@ -5,6 +5,8 @@ import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate
 import BookIcon from "@mui/icons-material/Book";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 
+//Photo by <a href="https://unsplash.com/@impatrickt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Patrick Tomasso</a> on <a href="https://unsplash.com/photos/open-book-lot-Oaqk7qqNh_c?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
 const Glassmorph = styled.div`
   background: rgba(240, 242, 245, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -21,6 +23,10 @@ const Glassmorph = styled.div`
 const Home = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
+      <img
+        src="/images/home_pic.jpg"
+        style={{ height: "30vh", objectFit: "cover" }}
+      />
       <div style={{ margin: "1rem" }}>
         <h3>
           Unleash Your Creativity, Control, and Collaboration - Welcome to

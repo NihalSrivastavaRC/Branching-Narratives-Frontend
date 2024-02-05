@@ -10,7 +10,7 @@ export default function ReadStory() {
 
   return (
     <div>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center", margin: "1rem" }}>
         <Button
           onClick={() => {
             setViewMode(false);
@@ -34,7 +34,7 @@ export default function ReadStory() {
           author={location.state.author}
         />
       ) : (
-        parse(location.state.content)
+        <div style={{ padding: "1rem" }}>{parse(location.state.content)}</div>
       )}
     </div>
   );
