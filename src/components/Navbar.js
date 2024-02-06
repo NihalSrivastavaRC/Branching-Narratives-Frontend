@@ -97,7 +97,7 @@ export default function Navbar() {
             sx: {
               overflow: "visible",
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-              backgroundColor: "#7FC7D9",
+              backgroundColor: "rgb(165, 125, 100)",
               mt: 1.5,
               "& .MuiAvatar-root": {
                 width: 32,
@@ -116,7 +116,7 @@ export default function Navbar() {
                 bgcolor: "background.paper",
                 transform: "translateY(-50%) rotate(45deg)",
                 zIndex: 0,
-                backgroundColor: "#7FC7D9",
+                backgroundColor: "rgb(165, 125, 100)",
               },
             },
           }}

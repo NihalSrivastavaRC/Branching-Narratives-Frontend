@@ -26,6 +26,7 @@ const Home = () => {
       <img
         src="/images/home_pic.jpg"
         style={{ height: "30vh", objectFit: "cover" }}
+        alt="Home"
       />
       <div style={{ margin: "1rem" }}>
         <h3>

@@ -90,73 +90,153 @@ export default function NewStory() {
           style={{
             flex: 1,
             margin: "2rem",
-            display: "flex",
-            flexDirection: "column",
+            display: "grid",
+            gridTemplateColumns: "25% auto auto",
+            gridTemplateRows: "auto auto auto",
             alignItems: "center",
-            justifyContent: "center",
           }}
         >
-          <h2>Create new story</h2>
-          <p>
+          <h2 style={{ gridColumnStart: 2, gridColumnEnd: 3, gridRowStart: 1 }}>
+            Create new story
+          </h2>
+          <p style={{ gridColumnStart: 2, gridColumnEnd: 3, gridRowStart: 2 }}>
             A repository contains all project files, including the revision
             history.
           </p>
-          <FormControl sx={{ display: "flex", flex: 1 }}>
-            <FormLabel sx={{ display: "flex", alignItems: "center" }}>
+          <FormControl
+            style={{
+              gridColumnStart: 1,
+              gridColumnEnd: 3,
+              gridRowStart: 3,
+              display: "grid",
+              gridTemplateColumns: "25% auto auto",
+              gridTemplateRows: "auto auto auto auto auto",
+              alignItems: "center",
+            }}
+          >
+            <FormLabel
+              sx={{
+                "&.Mui-focused": { color: "rgba(0, 0, 0, 0.6)" },
+                gridRowStart: 1,
+                gridColumnStart: 1,
+                fontWeight: "bold",
+              }}
+            >
               Title
-              <TextField
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                sx={{ margin: "1rem" }}
-              ></TextField>
             </FormLabel>
-            <FormLabel sx={{ display: "flex", alignItems: "center" }}>
-              Genre
-              <TextField
-                onChange={(e) => {
-                  setGenre(e.target.value);
-                }}
-                sx={{ margin: "1rem" }}
-              ></TextField>
-            </FormLabel>
+            <TextField
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              sx={{
+                margin: "1rem",
+                gridRowStart: 1,
+                gridColumnStart: 2,
+                gridColumnEnd: 4,
+                boxShadow:
+                  "rgb(200, 208, 231) 3.2px 3.2px 8px 0px inset, rgb(255, 255, 255) -3.2px -3.2px 8px 0px inset",
+              }}
+            ></TextField>
 
-            <FormLabel sx={{ display: "flex", alignItems: "center" }}>
+            <FormLabel
+              sx={{
+                "&.Mui-focused": { color: "rgba(0, 0, 0, 0.6)" },
+                gridRowStart: 2,
+                gridColumnStart: 1,
+                fontWeight: "bold",
+              }}
+            >
+              Genre
+            </FormLabel>
+            <TextField
+              onChange={(e) => {
+                setGenre(e.target.value);
+              }}
+              sx={{
+                margin: "1rem",
+                gridRowStart: 2,
+                gridColumnStart: 2,
+                gridColumnEnd: 4,
+                boxShadow:
+                  "rgb(200, 208, 231) 3.2px 3.2px 8px 0px inset, rgb(255, 255, 255) -3.2px -3.2px 8px 0px inset",
+              }}
+            ></TextField>
+
+            <FormLabel
+              sx={{
+                "&.Mui-focused": { color: "rgba(0, 0, 0, 0.6)" },
+                gridRowStart: 3,
+                gridColumnStart: 1,
+                fontWeight: "bold",
+              }}
+            >
               Description
-              <TextareaAutosize
-                minRows={2}
-                variant="soft"
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
-                style={{
-                  margin: "1rem",
-                  backgroundColor: "transparent",
-                  borderRadius: "0.25rem",
-                  borderColor: "gray",
-                }}
-              ></TextareaAutosize>
+            </FormLabel>
+            <TextareaAutosize
+              minRows={2}
+              variant="soft"
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+              style={{
+                margin: "1rem",
+                backgroundColor: "transparent",
+                borderRadius: "0.25rem",
+                borderColor: "gray",
+                gridRowStart: 3,
+                gridColumnStart: 2,
+                gridColumnEnd: 4,
+                boxShadow:
+                  "rgb(200, 208, 231) 3.2px 3.2px 8px 0px inset, rgb(255, 255, 255) -3.2px -3.2px 8px 0px inset",
+              }}
+            ></TextareaAutosize>
+            <FormLabel
+              sx={{
+                "&.Mui-focused": { color: "rgba(0, 0, 0, 0.6)" },
+                gridRowStart: 4,
+                gridColumnStart: 1,
+                fontWeight: "bold",
+              }}
+            >
+              Visibility
             </FormLabel>
             <RadioGroup
-              row
+              row={true}
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="female"
               name="radio-buttons-group"
               onChange={(e) => {
                 setVisibility(e.target.value);
               }}
-              sx={{ display: "flex", alignItems: "center" }}
+              sx={{
+                gridRowStart: 4,
+                gridColumnStart: 2,
+                gridColumnEnd: 4,
+              }}
             >
-              <FormLabel>Visibility</FormLabel>
               <FormControlLabel
                 value={true}
                 style={{ margin: "1rem", color: "rgba(0, 0, 0, 0.6)" }}
-                control={<Radio />}
+                control={
+                  <Radio
+                    sx={{
+                      boxShadow:
+                        "rgb(200, 208, 231) 3.2px 3.2px 8px 0px inset, rgb(255, 255, 255) -3.2px -3.2px 8px 0px inset",
+                    }}
+                  />
+                }
                 label="Public"
               />
               <FormControlLabel
                 value={false}
-                control={<Radio />}
+                control={
+                  <Radio
+                    sx={{
+                      boxShadow:
+                        "rgb(200, 208, 231) 3.2px 3.2px 8px 0px inset, rgb(255, 255, 255) -3.2px -3.2px 8px 0px inset",
+                    }}
+                  />
+                }
                 label="Private"
                 style={{ margin: "1rem", color: "rgba(0, 0, 0, 0.6)" }}
               />
@@ -164,7 +244,13 @@ export default function NewStory() {
             <Button
               variant="contained"
               onClick={onClickHandler}
-              style={{ margin: "1rem", backgroundColor: "#A57D64" }}
+              style={{
+                margin: "1rem",
+                backgroundColor: "#A57D64",
+                gridRowStart: 5,
+                gridColumnStart: 2,
+                gridColumnEnd: 4,
+              }}
             >
               Create Story
             </Button>
