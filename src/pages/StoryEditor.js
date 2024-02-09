@@ -19,7 +19,7 @@ export default function StoryEditor() {
 
   useEffect(() => {
     setValue(location.state.content);
-  }, [location.state.content])
+  }, [location.state.content]);
 
   const onClickHandler = () => {
     console.log(value, commitMessage);
@@ -37,7 +37,7 @@ export default function StoryEditor() {
       )
       .then((response) => {
         console.log(response);
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
@@ -49,8 +49,8 @@ export default function StoryEditor() {
       className="page"
       style={{ display: "flex", flexDirection: "column", margin: "1rem" }}
     >
-      <h2>Title: {location.state.title}</h2>
-      <h2>Genre: {location.state.genre}</h2>
+      <h2>Title: </h2> {location.state.title}
+      <h2>Genre: </h2> {location.state.genre}
       <h2 style={{ textAlign: "center" }}>StoryEditor</h2>
       <ReactQuill
         theme="snow"
@@ -58,7 +58,6 @@ export default function StoryEditor() {
         onChange={setValue}
         style={{ margin: "1rem 0 1rem 0" }}
       />
-
       <div
         style={{
           backgroundColor: "#365486",
@@ -73,6 +72,7 @@ export default function StoryEditor() {
             setCommitMessage(e.target.value);
           }}
           style={{ margin: "1rem" }}
+          sx={{ input: { color: "white" } }}
         ></TextField>
         <Button
           variant="contained"

@@ -34,6 +34,7 @@ export default function NewStory() {
           description: description,
           visibility: visibility,
           commit_history: [],
+          forkedFrom: "",
         },
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -188,6 +189,7 @@ export default function NewStory() {
                 gridColumnEnd: 4,
                 boxShadow:
                   "rgb(200, 208, 231) 3.2px 3.2px 8px 0px inset, rgb(255, 255, 255) -3.2px -3.2px 8px 0px inset",
+                padding: "1rem",
               }}
             ></TextareaAutosize>
             <FormLabel

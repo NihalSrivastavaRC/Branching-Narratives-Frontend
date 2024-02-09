@@ -26,12 +26,54 @@ function Explore() {
     axios
       .get(BASE_URL + "/getAllStories")
       .then((response) => {
+        console.log(response.data);
         setStories(response.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  const fork = (title, genre, description, content, username) => {
+    const token = localStorage.getItem("jwt_token");
+    axios
+      .post(
+        BASE_URL + "/incrementForkCounter",
+        { title: title, username: username },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios
+      .post(
+        BASE_URL + "/createStory",
+        {
+          title: title,
+          genre: genre,
+          description: description,
+          visibility: true,
+          commit_history: [
+            {
+              commitMessage: "forked",
+              content: content,
+              time: Date.now(),
+            },
+          ],
+          forkedFrom: username,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const onClickHandler = () => {
     axios
@@ -59,7 +101,7 @@ function Explore() {
             onChange={(e) => {
               setSearchWord(e.target.value);
             }}
-            InputProps={{ disableUnderline: true }}
+            InputProps={{ disableunderline: "true" }}
             sx={{
               boxShadow:
                 "rgb(200, 208, 231) 3.2px 3.2px 8px 0px inset, rgb(255, 255, 255) -3.2px -3.2px 8px 0px inset",
@@ -83,15 +125,18 @@ function Explore() {
         <Grid container>
           {stories.map((story, index) => {
             return (
-              <Grid item xs={12} sm={6}>
-                <Card variant="outlined" key={index} style={{ margin: "1rem" }}>
+              <Grid item xs={12} sm={6} key={index}>
+                <Card variant="outlined" style={{ margin: "1rem" }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 14 }}
                       color="text.secondary"
                       gutterBottom
                     >
-                      {story.genre}
+                      <span>{story.genre}</span>
+                      <span style={{ float: "right" }}>
+                        Fork Count: {story.forkCount}
+                      </span>
                     </Typography>
                     <Typography variant="h5" component="div">
                       {story.title}
@@ -112,6 +157,7 @@ function Explore() {
                               story.commit_history.length - 1
                             ].content;
                         }
+
                         navigate("/readStory", {
                           state: {
                             title: story.title,
@@ -125,6 +171,38 @@ function Explore() {
                       }}
                     >
                       Read now
+                    </Button>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        let latest_commit_content = "";
+                        if (story.commit_history) {
+                          latest_commit_content =
+                            story.commit_history[
+                              story.commit_history.length - 1
+                            ].content;
+                        }
+
+                        fork(
+                          story.title,
+                          story.genre,
+                          story.description,
+                          latest_commit_content,
+                          story.username
+                        );
+
+                        navigate("/storyEditor", {
+                          state: {
+                            title: story.title,
+                            genre: story.genre,
+                            description: story.description,
+                            visibility: story.visibility,
+                            content: latest_commit_content,
+                          },
+                        });
+                      }}
+                    >
+                      Fork
                     </Button>
                   </CardActions>
                 </Card>

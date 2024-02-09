@@ -121,6 +121,7 @@ export const Book = (props) => {
                     ? index + 2
                     : maxLocation - (index + 1),
               }}
+              key={index}
             >
               <div className="front">
                 <div id={"f" + (index + 2)} className="front-content">
