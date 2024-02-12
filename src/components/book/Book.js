@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import parse from "html-react-parser";
 
 import "./style.css";
+
+// function iterativelyReplaceRegex(text, regex) {
+//   let newText = text;
+//   while (true) {
+//     const match = regex.exec(newText);
+//     if (!match) {
+//       return newText;
+//     }
+//     newText = newText.replace(regex, `<div>${match[2]}</div>`);
+//   }
+// }
 
 export const Book = (props) => {
   const [flippedIndex, setFlippedIndex] = useState(0);
@@ -10,7 +22,13 @@ export const Book = (props) => {
   const [bookOpen, setBookOpen] = useState(false);
   // const [bookClose, setBookClose] = useState(false);
 
-  var words = props.content.replace(/<[^>]+>/g, "").split(" ");
+  var cleaned_text = props.content.replace(/<[^>]+>/g, "");
+  // var pretty_text = cleaned_text;
+  // const regexp = /(###)(.*)(###)/;
+  // pretty_text = iterativelyReplaceRegex(pretty_text, regexp);
+  // console.log(pretty_text);
+
+  var words = cleaned_text.split(" ");
   const wordLimit = 140;
 
   var pages = [];
@@ -79,6 +97,7 @@ export const Book = (props) => {
         style={{
           transform: bookOpen ? "translateX(-180px)" : "",
           // transform: bookClose ? "translateX(0px)" : "",
+          zIndex: 100,
         }}
       >
         <ArrowBackIosIcon className="arrow" />
@@ -125,12 +144,14 @@ export const Book = (props) => {
             >
               <div className="front">
                 <div id={"f" + (index + 2)} className="front-content">
-                  {page[0]}
+                  {/* {page[0]} */}
+                  {parse(page[0])}
                 </div>
               </div>
               <div className="back">
                 <div id={"b" + (index + 2)} className="back-content">
-                  {page[1]}
+                  {/* {page[1]} */}
+                  {parse(page[1])}
                 </div>
               </div>
             </div>
@@ -144,6 +165,7 @@ export const Book = (props) => {
         style={{
           transform: bookOpen ? "translateX(180px)" : "",
           // transform: bookClose ? "translateX(0px)" : "",
+          zIndex: 100,
         }}
       >
         <ArrowForwardIosIcon className="arrow" />
