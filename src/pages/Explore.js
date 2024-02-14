@@ -17,12 +17,26 @@ import { useNavigate } from "react-router-dom";
 function Explore() {
   const [stories, setStories] = useState([]);
   const [searchWord, setSearchWord] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState("");
 
   const navigate = useNavigate();
 
   const BASE_URL = "http://localhost:3001";
 
+  const token = localStorage.getItem("jwt_token");
+
   useEffect(() => {
+    axios
+      .get(BASE_URL + "/isLoggedIn", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoggedIn(false);
+      });
     axios
       .get(BASE_URL + "/getAllStories")
       .then((response) => {
@@ -32,7 +46,7 @@ function Explore() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [token]);
 
   const fork = (title, genre, description, content, username) => {
     const token = localStorage.getItem("jwt_token");
@@ -174,6 +188,7 @@ function Explore() {
                     </Button>
                     <Button
                       size="small"
+                      disabled={!isLoggedIn}
                       onClick={() => {
                         let latest_commit_content = "";
                         if (story.commit_history) {
